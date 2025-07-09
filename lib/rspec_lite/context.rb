@@ -28,7 +28,21 @@ module RspecLite
     end
 
     def run
-      pp 'Before hooks', @before_hooks, 'After hooks', @after_hooks
+      puts "Running context: #{@description}"
+
+      # Execute before hooks
+      @before_hooks.each do |hook|
+        instance_eval(&hook)
+      end
+
+      @lets.each do |name, value|
+        puts "name: #{name} value: #{value.call}"
+      end
+
+      # Execute after hooks
+      @after_hooks.each do |hook|
+        instance_eval(&hook)
+      end
     end
   end
 end
