@@ -17,3 +17,10 @@ RspecLite.describe 'Let Test' do
 
   test_singleton_behavior
 end
+
+RspecLite.describe 'Hook Test' do
+  before { puts 'Running before each test' }
+  after { puts 'Running after each test' }
+
+  let(:value) { 42 }
+end
