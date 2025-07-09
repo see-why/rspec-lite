@@ -1,4 +1,4 @@
-# frozen_string_literal; true
+# frozen_string_literal: true
 
 Dir[File.expand_path('lib/**/*.rb')].sort.each { |file| require file }
 
