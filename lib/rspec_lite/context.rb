@@ -7,6 +7,7 @@ module RspecLite
       @lets = {}
       @before_hooks = []
       @after_hooks = []
+      @tests = []
     end
 
     def before(&block)
@@ -30,18 +31,20 @@ module RspecLite
     def run
       puts "Running context: #{@description}"
 
-      # Execute before hooks
-      @before_hooks.each do |hook|
-        instance_eval(&hook)
-      end
+      @tests.each do |test|
+        @memoized = nil
 
-      @lets.each do |name, value|
-        puts "name: #{name} value: #{value.call}"
-      end
+        @before_hooks.each { |hook| instance_eval(&hook) }
 
-      # Execute after hooks
-      @after_hooks.each do |hook|
-        instance_eval(&hook)
+        begin
+            instance_eval(&test[:block])
+
+            puts "  #{test[:description]}: Passed"
+        rescue => e
+          puts "  #{test[:description]}: Failed - #{e.message}"
+        end
+
+        @after_hooks.each { |hook| instance_eval(&hook) }
       end
     end
   end
