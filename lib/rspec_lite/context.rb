@@ -28,6 +28,14 @@ module RspecLite
       end
     end
 
+    def eval_test_block(description, block)
+      instance_eval(&block)
+
+      puts "  #{description}: Passed"
+    rescue => e
+      puts "  #{description}: Failed - #{e.message}"
+    end
+
     def run
       puts "Running context: #{@description}"
 
@@ -35,15 +43,7 @@ module RspecLite
         @memoized = nil
 
         @before_hooks.each { |hook| instance_eval(&hook) }
-
-        begin
-            instance_eval(&test[:block])
-
-            puts "  #{test[:description]}: Passed"
-        rescue => e
-          puts "  #{test[:description]}: Failed - #{e.message}"
-        end
-
+        eval_test_block(test[:description], test[:block])
         @after_hooks.each { |hook| instance_eval(&hook) }
       end
     end
