@@ -1,6 +1,9 @@
 # frozen_string_literal: true
+
 RspecLite.describe 'Let Test' do
-  let(:number) { 42 }
+  it 'saves variable' do
+    let(:number) { 42 }
+  end
 end
 
 RspecLite.describe 'Hook Test' do
@@ -8,4 +11,10 @@ RspecLite.describe 'Hook Test' do
   after { puts 'Running after each test' }
 
   let(:position) { 100 }
+end
+
+RspecLite.describe 'My Array' do
+  it 'is empty' do
+
+  end
 end
