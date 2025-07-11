@@ -51,5 +51,9 @@ module RspecLite
         @after_hooks.each { |hook| instance_eval(&hook) }
       end
     end
+
+    def expect(actual)
+      RspecLite.expect(actual)
+    end
   end
 end
