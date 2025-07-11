@@ -28,6 +28,10 @@ module RspecLite
       end
     end
 
+    def it(description, &block)
+      @tests << { description: description, block: block }
+    end
+
     def eval_test_block(description, block)
       instance_eval(&block)
 
