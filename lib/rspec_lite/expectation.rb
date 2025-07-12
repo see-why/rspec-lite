@@ -8,8 +8,8 @@ module RspecLite
 
     def to(matcher)
       return unless matcher.matches?(@actual)
-        raise "Expected #{matcher.expected}, but got #{@actual}"
-      end
+
+      raise "Expected #{matcher.expected}, but got #{@actual}"
     end
   end
 end
