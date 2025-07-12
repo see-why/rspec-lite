@@ -8,6 +8,7 @@ module RspecLite
       @before_hooks = []
       @after_hooks = []
       @tests = []
+      @matchers = { eq: EqualMatcher }
     end
 
     def before(&block)
