@@ -33,14 +33,6 @@ module RspecLite
       @tests << { description: description, block: block }
     end
 
-    def eval_test_block(description, block)
-      instance_eval(&block)
-
-      puts "  #{description}: Passed"
-    rescue => e
-      puts "  #{description}: Failed - #{e.message}"
-    end
-
     def run
       puts "Running context: #{@description}"
 
@@ -55,6 +47,28 @@ module RspecLite
 
     def expect(actual)
       RspecLite.expect(actual)
+    end
+
+    def method_missing(method_name, *args, &block)
+      if matcher_class = @matchers[method_name]
+        matcher_class.new(*args)
+      else
+        super
+      end
+    end
+
+    def respond_to_missing?(method_name, include_private = false)
+      @matchers.key?(method_name) || super
+    end
+
+    private
+
+    def eval_test_block(description, block)
+      instance_eval(&block)
+
+      puts "  #{description}: Passed"
+    rescue => e
+      puts "  #{description}: Failed - #{e.message}"
     end
   end
 end
