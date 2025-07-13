@@ -34,6 +34,7 @@ RspecLite.describe 'My Array' do
 
   it 'can be appended to' do
     array << 4
+    array << 5
     expect(array.size).to(eq(5))
   end
 end
