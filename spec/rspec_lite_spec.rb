@@ -2,7 +2,7 @@
 
 RspecLite.describe 'Let Test' do
   it 'saves variable' do
-    let(:number) { 42 }
+    let(:test_number) { 42 }
   end
 end
 
@@ -10,11 +10,16 @@ RspecLite.describe 'Hook Test' do
   before { puts 'Running before each test' }
   after { puts 'Running after each test' }
 
-  let(:position) { 100 }
+  let(:starting_position) { 100 }
 end
 
 RspecLite.describe 'My Array' do
-  let(:array) { [1, 2, 3] }
+  let(:initial_array) { [1, 2, 3] }
+  let(:initial_size) { 3 }
+  let(:search_element) { 2 }
+  let(:first_new_element) { 4 }
+  let(:second_new_element) { 5 }
+  let(:final_size) { 5 }
 
   before do
     puts 'Running setup before each test'
@@ -25,16 +30,16 @@ RspecLite.describe 'My Array' do
   end
 
   it 'has the correct size' do
-    expect(array.size).to(eq(3))
+    expect(initial_array.size).to(eq(initial_size))
   end
 
-  it 'contains the number 2' do
-    expect(array.include?(2)).to(eq(true))
+  it 'contains the expected element' do
+    expect(initial_array.include?(search_element)).to(eq(true))
   end
 
   it 'can be appended to' do
-    array << 4
-    array << 5
-    expect(array.size).to(eq(5))
+    initial_array << first_new_element
+    initial_array << second_new_element
+    expect(initial_array.size).to(eq(final_size))
   end
 end
