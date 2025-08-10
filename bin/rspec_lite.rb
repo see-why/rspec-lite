@@ -7,5 +7,5 @@ require_relative '../lib/rspec_lite'
 if ARGV.empty?
   Dir['./spec/**/*_spec.rb'].each { |file| load file }
 else
-  AGRV.each { |file| load file }
+  ARGV.each { |file| load file }
 end
